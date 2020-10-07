@@ -4,7 +4,7 @@ CREATE TABLE users(
     pass VARCHAR(200) NOT NULL
 );
 
-CREATE TABLE profile(
+CREATE TABLE profiles(
     ID INTEGER REFERENCES users(ID),
     firstname TEXT NOT NULL,
     lastname TEXT NOT NULL,
@@ -17,14 +17,22 @@ CREATE TABLE profile(
 );
 
 CREATE TABLE products(
-    ID SERIAL PRIMARY KEY
-    name VARCHAR(200) NOT NULL
-    description VARCHAR(10000) NOT NULL
-    price SMALLMONEY NOT NULL
-)
+    ID SERIAL PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    description VARCHAR(10000) NOT NULL,
+    price MONEY NOT NULL
+);
 
-CREATE TABLE cart (
-    ID SERIAL PRIMARY KEY
-    customerID INTEGER REFERENCES users(ID)
-)
+CREATE TABLE carts (
+    ID SERIAL PRIMARY KEY,
+    customerID INTEGER REFERENCES users(ID),
+    creationDate TIMESTAMP
+);
 
+CREATE TABLE cartDetails(
+    ID SERIAL PRIMARY KEY,
+    cartID INTEGER,
+    productID INTEGER,
+    qty INTEGER,
+    addDate TIMESTAMP
+);
